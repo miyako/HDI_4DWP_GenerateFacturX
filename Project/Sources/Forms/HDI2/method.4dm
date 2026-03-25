@@ -1,13 +1,12 @@
 var $info : cs:C1710.INFOSelection
 
 Case of 
-		
 	: (Form event code:C388=On Load:K2:1)
 		
 		$info:=ds:C1482.INFO.all().orderBy("pageNumber")
 		Form:C1466.tabs:=New object:C1471("values"; $info.extract("tabTitle"); "index"; 0)
 		
-		WParea:=ds:C1482.INFO.all().first().wp
+		OBJECT Get pointer:C1124(Object named:K67:5; "WParea")->:=ds:C1482.INFO.all().first().wp
 		
 		Form:C1466.trace:=False:C215
 		
@@ -27,21 +26,19 @@ Case of
 		
 		Form:C1466.validationXML:="https://services.fnfe-mpe.org/account/home"
 		Form:C1466.validationPDF:="https://demo.verapdf.org"
-		Form:C1466.templateLanguage:=""  // french or german later
+		Form:C1466.templateLanguage:=""  // あとで french または german に設定する
 		
 		SET TIMER:C645(-1)
 		
 	: (Form event code:C388=On Page Change:K2:54)
 		
-		WParea:=ds:C1482.INFO.query("pageNumber = :1"; FORM Get current page:C276).first().wp
-		
+		OBJECT Get pointer:C1124(Object named:K67:5; "WParea")->:=ds:C1482.INFO.query("pageNumber = :1"; FORM Get current page:C276).first().wp
 		
 	: (Form event code:C388=On Timer:K2:25)
+		
 		SET TIMER:C645(0)
 		
-		
 		OBJECT SET ENABLED:C1123(*; "btnSetContext"; Not:C34(OB Is empty:C1297(Form:C1466.context)))
-		
 		OBJECT SET ENABLED:C1123(*; "btnBuildXML"; Form:C1466.contextSet)
 		
 		OBJECT SET ENABLED:C1123(*; "btnExportXML"; Form:C1466.xml#"")

@@ -22,7 +22,7 @@
 			"title": ":xliff:CommonMenuFile",
 			"items": [
 				{
-					"title": "Demo",
+					"title": "デモ",
 					"method": "00_Start",
 					"shortcutAccel": true,
 					"shortcutKey": "k"

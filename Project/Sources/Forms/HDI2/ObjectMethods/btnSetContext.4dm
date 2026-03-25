@@ -9,6 +9,6 @@ If (Form:C1466.context#Null:C1517)
 	Form:C1466.contextSet:=True:C214
 	SET TIMER:C645(-1)
 Else 
-	//should not append, button is disabled
+	// この場合はボタンが無効化されているため、このケースは発生しない筈
 End if 
 

@@ -1,5 +1,5 @@
-//This context is saved in the [Invoices]context field
-//The french sample is ready
+// 準備用。このコンテキストは [Invoices]context フィールドに保存されます
+// フランス語のサンプルの準備ができています
 
 var $c; $item; $tax : Object
 
@@ -99,7 +99,7 @@ Case of
 		$item.lineTotalAmount:=45
 		$c.items.push($item)
 		
-		$c.tradeTaxes:=New collection:C1472  // tax rates collections
+		$c.tradeTaxes:=New collection:C1472  // 税率のコレクション
 		
 		$tax:=New object:C1471
 		$tax.rateApplicablePercent:=20

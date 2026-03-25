@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
 #DECLARE($context : Object)->$xmlText : Text
 
 var $file : 4D:C1709.File
@@ -14,13 +14,14 @@ $xmlText:=$file.getText()
 
 $dom:=DOM Parse XML variable:C720($xmlText)  //rsm:CrossIndustryInvoice
 
-// STATIC VALUES
+// 静的な値
 
 $col:=New collection:C1472()
 $col.push({xpath: "rsm:ExchangedDocument/ram:ID"; value: $context.invoice.ID})
 $col.push({xpath: "rsm:ExchangedDocument/ram:IncludedNote/ram:Content"; value: $context.invoice.content})
 
 $valueString:=String:C10(Year of:C25($context.invoice.date); "0000")+String:C10(Month of:C24($context.invoice.date); "00")+String:C10(Day of:C23($context.invoice.date); "00")
+$col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString"; value: $valueString})
 $col.push({xpath: "rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString"; value: $valueString})
 
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name"; value: $context.seller.name})
@@ -30,8 +31,6 @@ $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgre
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName"; value: $context.seller.city})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID"; value: $context.seller.countryID})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID"; value: $context.seller.tva})
-
-
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name"; value: $context.buyer.name})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID"; value: $context.buyer.siret})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode"; value: $context.buyer.zipCode})
@@ -39,7 +38,6 @@ $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgre
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CityName"; value: $context.buyer.city})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountryID"; value: $context.buyer.countryID})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration/ram:ID"; value: $context.buyer.tva})
-
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID"; value: $context.invoice.buyerIssuerAssignedID})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:IssuerAssignedID"; value: $context.invoice.contractIssuerAssignedID})
 
@@ -50,8 +48,6 @@ $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSett
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode"; value: $context.invoice.currencyCode})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode"; value: $context.invoice.typeCode})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount/ram:IBANID"; value: $context.seller.bank.iban})
-
-
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount"; value: $context.invoice.lineTotalAmount})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount"; value: $context.invoice.lineTotalAmount})
 $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount"; value: $context.invoice.taxTotalAmount; attributeName: "currencyID"; attributeValue: $context.invoice.currencyCode})
@@ -62,14 +58,18 @@ $col.push({xpath: "rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSett
 
 For each ($element; $col)
 	$ref:=DOM Find XML element:C864($DOM; $element.xpath)
-	DOM SET XML ELEMENT VALUE:C868($ref; $element.value)
-	If ($element.attributeName#Null:C1517)
-		DOM SET XML ATTRIBUTE:C866($ref; $element.attributeName; $element.attributeValue)
+	If (String:C10($element.value)="")
+		DOM REMOVE XML ELEMENT:C869(DOM Get parent XML element:C923($ref))
+	Else 
+		DOM SET XML ELEMENT VALUE:C868($ref; $element.value)
+		If ($element.attributeName#Null:C1517)
+			DOM SET XML ATTRIBUTE:C866($ref; $element.attributeName; $element.attributeValue)
+		End if 
 	End if 
 End for each 
 
 
-// DYNAMIC VALUES (based on number of items)
+// 動的な値 (項目数に基づく)
 $itemID:=1
 For each ($item; $context.items)
 	
@@ -80,30 +80,31 @@ For each ($item; $context.items)
 		$parentPath:="rsm:SupplyChainTradeTransaction"
 		$parentRef:=DOM Find XML element:C864($DOM; $parentPath)
 		
-		$newStruct:=DOM Create XML Ref:C861("toBeRenamed")  //Error IF created straight as "ram:IncludedSupplyChainTradeLineItem")
+		$newStruct:=DOM Create XML Ref:C861("toBeRenamed")  // "ram:IncludedSupplyChainTradeLineItem" として直接生成するとエラーになります
 		$ref:=DOM Insert XML element:C1083($parentRef; $newStruct; $itemID)
 		DOM CLOSE XML:C722($newStruct)
-		DOM SET XML ELEMENT NAME:C867($ref; "ram:IncludedSupplyChainTradeLineItem")  // rename now
+		DOM SET XML ELEMENT NAME:C867($ref; "ram:IncludedSupplyChainTradeLineItem")  // 名称変更します
 		
 		//$path:="rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem["+String($itemID)+"]"
 		//$ref:=DOM Find XML element($DOM; $path)
 		
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:AssociatedDocumentLineDocument/ram:LineID")
+		//$ref:=DOM Create XML element($DOM; $path+"/ram:SpecifiedTradeProduct/ram:SellerAssignedID")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedTradeProduct/ram:Name")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:TypeCode")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:CategoryCode")
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent")
-		
 		$ref:=DOM Create XML element:C865($DOM; $path+"/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount")
 		
 	End if 
 	
+	//$item.SellerAssignedID:=Generate UUID(7)
 	
 	$col:=New collection:C1472()
 	$col.push({xpath: $path+"/ram:AssociatedDocumentLineDocument/ram:LineID"; value: String:C10($itemID)})
-	//$col.push({xpath: $path+"/ram:SpecifiedTradeProduct/ram:GlobalID"; value: $item.globalID; attributeName: "schemeID"; attributeValue: $item.schemeID})  //***
+	//$col.push({xpath: $path+"/ram:SpecifiedTradeProduct/ram:SellerAssignedID"; value: $item.SellerAssignedID})  //***
 	$col.push({xpath: $path+"/ram:SpecifiedTradeProduct/ram:Name"; value: $item.name})
 	$col.push({xpath: $path+"/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount"; value: $item.chargeAmount})
 	
@@ -127,7 +128,7 @@ For each ($item; $context.items)
 End for each 
 
 
-// DYNAMIC VALUES (based on distinct tax rates)
+// 動的な値 (税率に基づく)
 $itemID:=1
 For each ($item; $context.tradeTaxes)
 	
@@ -139,15 +140,15 @@ For each ($item; $context.tradeTaxes)
 		$parentPath:="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement"
 		$parentRef:=DOM Find XML element:C864($DOM; $parentPath)
 		
-		$newStruct:=DOM Create XML Ref:C861("toBeRenamed")  //Error IF created straight as "ram:IncludedSupplyChainTradeLineItem")
+		$newStruct:=DOM Create XML Ref:C861("toBeRenamed")  // "ram:IncludedSupplyChainTradeLineItem" として直接生成するとエラーになります
 		
-		// the FIRST ApplicableTradeTax is at the FOURTH position in the ApplicableHeaderTradeSettlement
-		// the SECOND ApplicableTradeTax is at the FIFTH position in the ApplicableHeaderTradeSettlement
-		// This explains the $itemID+3 in the line below ($itemID shall be equal to 2)
+		// 1つ目の ApplicableTradeTax は ApplicableHeaderTradeSettlement の 4つ目の位置にあります
+		// 2つ目の ApplicableTradeTax は ApplicableHeaderTradeSettlement の 5つ目の位置にあります
+		// 下の行で $itemID+3 となるのは、この理由のためです
 		
-		$ref:=DOM Insert XML element:C1083($parentRef; $newStruct; $itemID+3)  // +3 (see above)
+		$ref:=DOM Insert XML element:C1083($parentRef; $newStruct; $itemID+3)  // +3 (上述参照)
 		DOM CLOSE XML:C722($newStruct)
-		DOM SET XML ELEMENT NAME:C867($ref; "ram:ApplicableTradeTax")  // rename now
+		DOM SET XML ELEMENT NAME:C867($ref; "ram:ApplicableTradeTax")  // 名称変更します
 		
 		//$ref:=DOM Create XML element($DOM; $path)
 		

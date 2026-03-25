@@ -28,10 +28,10 @@ Case of
 		
 		$options:=New object:C1471
 		
-		$options.title:="Generate a factur-x/ZUGFeRD document?"  //+$cr+"00_Start Method"
+		$options.title:="factur-x/ZUGFeRD 文書を作成するの？"  //+$cr+"00_Start Method"
 		
 		$options.blog:="blog.4d.com"
-		$options.info:="4D Write Pro feature"  //ex : "4D View Pro feature"
+		$options.info:="4D Write Pro 機能"  //ex : "4D View Pro feature"
 		
 		$options.minimumVersion:="2040"  // 2040 means 20R4   2003 means 20.3 (do not use !)
 		

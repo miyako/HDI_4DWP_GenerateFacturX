@@ -4,7 +4,7 @@
 	"windowSizingY": "fixed",
 	"width": 724,
 	"height": 560,
-	"menuBar": "Menu Bar #1",
+	"menuBar": "Barre #1",
 	"markerHeader": 15,
 	"markerBody": 200,
 	"markerBreak": 220,
@@ -179,10 +179,10 @@
 				},
 				"txtTitle": {
 					"type": "text",
-					"top": 58,
+					"top": 71,
 					"left": 160,
 					"width": 544,
-					"height": 50,
+					"height": 22,
 					"stroke": "automatic",
 					"textAlign": "left",
 					"fontSize": 18,
@@ -200,16 +200,6 @@
 					"fontSize": 30,
 					"text": "How do I…",
 					"fontTheme": "normal"
-				},
-				"White90": {
-					"type": "picture",
-					"top": 110,
-					"left": 1,
-					"width": 724,
-					"height": 364,
-					"visibility": "hidden",
-					"pictureFormat": "tiled",
-					"picture": "Images/White90.png"
 				},
 				"ErrorMainText": {
 					"type": "text",
@@ -239,12 +229,13 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"colorScheme": "light",
+	"colorScheme": "dark",
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"geometryStamp": 2
 }

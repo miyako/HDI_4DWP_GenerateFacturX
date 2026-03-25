@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+  <file datatype="x-STR#" original="undefined" product-version="v20" source-language="en-US" target-language="ja">
+    <header>
+      <note/>
+    </header>
+    <body>
+
+        <!-- Work Area -->
+<group resname="[ProjectForm]">
+<group resname="HDI">
+<trans-unit id="1" resname="BtnDemo">
+<source>Demo</source>
+<target>スタート</target>
+</trans-unit>
+<trans-unit id="2" resname="TxtVersion">
+<source>{version} and above</source>
+<target>{version} 以降...</target>
+</trans-unit>
+<trans-unit id="3" resname="labelVersion">
+<source>Version:</source>
+<target>バージョン:</target>
+</trans-unit>
+<trans-unit id="4" resname="labelBlog">
+<source>Blog:</source>
+<target>Blog:</target>
+</trans-unit>
+<trans-unit id="5" resname="labelInfo">
+<source>Info:</source>
+<target>概要:</target>
+</trans-unit>
+<trans-unit id="6" resname="txtTitle">
+<source>• title •</source>
+<target>• title •</target>
+</trans-unit>
+<trans-unit id="7" resname="Text">
+<source>How do I…</source>
+<target>どうやって...</target>
+</trans-unit>
+<trans-unit id="8" resname="ErrorMainText">
+<source>Sorry, this "How do I" (HDI) example must
+be used with a newer version of 4D
+({version} and above)</source>
+<target>申し訳ありません。この"How do I..." (HDI) サンプルは、より新しいバージョンの4D（{version} 以降）で開く必要があります。</target>
+</trans-unit>
+<trans-unit id="9" resname="ErrorSubText">
+<source>Do not attempt to open this HDI in design mode using this version; if you do so, forms and/or methods could be altered because of missing functionality.</source>
+<target>このHDIをデザインモードで開かないでください。
+開いてしまった場合、フォームやメソッドが不完全になってしまう恐れがあります。</target>
+</trans-unit>
+</group>
+<group resname="HDI2">
+<trans-unit id="1" resname="Texte1">
+<source>Factur-x (xml)</source>
+<target>Factur-x (xml)</target>
+</trans-unit>
+<trans-unit id="2" resname="btnExportXML">
+<source>Export XML</source>
+<target>XML の出力</target>
+</trans-unit>
+<trans-unit id="3" resname="Texte">
+<source>Context (json)</source>
+<target>コンテキスト (json)</target>
+</trans-unit>
+<trans-unit id="4" resname="btnExportFacturx">
+<source>Export factur-X / ZUGFeRD</source>
+<target>factur-X / ZUGFeRD の出力</target>
+</trans-unit>
+<trans-unit id="5" resname="btnSetContext">
+<source>Set data context</source>
+<target>データコンテキストを設定する</target>
+</trans-unit>
+<trans-unit id="6" resname="btnValidateXML">
+<source>XML Validation web site (*)</source>
+<target>XML検証 Webサイト (*)</target>
+</trans-unit>
+<trans-unit id="7" resname="btnGerman">
+<source>German</source>
+<target>ドイツ語</target>
+</trans-unit>
+<trans-unit id="8" resname="btnFrench">
+<source>French</source>
+<target>フランス語</target>
+</trans-unit>
+<trans-unit id="9" resname="Text">
+<source>Load template</source>
+<target>テンプレートを読み込む</target>
+</trans-unit>
+<trans-unit id="10" resname="btnBuildXML">
+<source>Build XML Profile</source>
+<target>XML プロファイルの構築</target>
+</trans-unit>
+<trans-unit id="11" resname="btnReset">
+<source>Reset</source>
+<target>リセット</target>
+</trans-unit>
+<trans-unit id="12" resname="Text1">
+<source>(to the 4DWP template)</source>
+<target>(4DWP テンプレートに対して)</target>
+</trans-unit>
+<trans-unit id="13" resname="btnValidateFacturx">
+<source>XML Validation web site(*)</source>
+<target>PDF検証 Webサイト</target>
+</trans-unit>
+<trans-unit id="14" resname="Texte2">
+<source>1</source>
+<target>1</target>
+</trans-unit>
+<trans-unit id="15" resname="Texte4">
+<source>2</source>
+<target>2</target>
+</trans-unit>
+<trans-unit id="16" resname="Texte5">
+<source>3</source>
+<target>3</target>
+</trans-unit>
+<trans-unit id="17" resname="Texte3">
+<source>{4}</source>
+<target>{4}</target>
+</trans-unit>
+<trans-unit id="18" resname="Texte6">
+<source>5</source>
+<target>5</target>
+</trans-unit>
+<trans-unit id="19" resname="Text2">
+<source>Note : this step is not mandatory but is highly recommanded to check the validity of the generated XML for your future developments.</source>
+<target>注: このステップは必須ではありませんが、将来の開発のためにも、生成された XML の妥当性をチェックすることを強くお勧めします。</target>
+</trans-unit>
+<trans-unit id="20" resname="Text3">
+<source>(*) This website needs a free registration to validate XML profiles and factur-x /SUGFeER invoices.</source>
+<target>(*) この Webサイトで、XMLプロファイルや factur-x /SUGFeER インボイスを検証するには無料登録が必要です。</target>
+</trans-unit>
+<trans-unit id="21" resname="Text4">
+<source>(based on the same context)</source>
+<target>(同コンテキストに基づいて)</target>
+</trans-unit>
+<trans-unit id="22" resname="btnTrace">
+<source>Trace code</source>
+<target>トレース</target>
+</trans-unit>
+</group>
+</group>
+
+
+
+    </body>
+  </file>
+</xliff>

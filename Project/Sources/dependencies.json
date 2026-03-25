@@ -1,0 +1,9 @@
+{
+	"version": 2100,
+	"dependencies": {
+		"4D WritePro Interface": {
+			"github": "4d/4D-WritePro-Interface",
+			"version": "4d"
+		}
+	}
+}

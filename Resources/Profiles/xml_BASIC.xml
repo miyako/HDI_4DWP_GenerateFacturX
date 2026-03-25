@@ -13,7 +13,7 @@
     <ram:ID>XXX--invoice.ID--XXX</ram:ID>
     <ram:TypeCode>380</ram:TypeCode>
     <ram:IssueDateTime>
-      <udt:DateTimeString format="102">20171113</udt:DateTimeString>
+      <udt:DateTimeString format="102">YYYYMMDD</udt:DateTimeString>
     </ram:IssueDateTime>
     <ram:IncludedNote>
       <ram:Content>XXX-invoice.content-XXX</ram:Content>
@@ -28,7 +28,7 @@
         <ram:LineID>XXX</ram:LineID>
       </ram:AssociatedDocumentLineDocument>
       <ram:SpecifiedTradeProduct>
-        <ram:Name>XXX</ram:Name>
+          <ram:Name>XXX</ram:Name>
       </ram:SpecifiedTradeProduct>
       <ram:SpecifiedLineTradeAgreement>
         <ram:NetPriceProductTradePrice>
@@ -99,8 +99,14 @@
       </ram:ContractReferencedDocument>
     </ram:ApplicableHeaderTradeAgreement>
 
-    <ram:ApplicableHeaderTradeDelivery/>
-    
+    <ram:ApplicableHeaderTradeDelivery>
+        <ram:ActualDeliverySupplyChainEvent>
+            <ram:OccurrenceDateTime>
+                <udt:DateTimeString format="102">YYYYMMDD</udt:DateTimeString>
+            </ram:OccurrenceDateTime>
+        </ram:ActualDeliverySupplyChainEvent>
+    </ram:ApplicableHeaderTradeDelivery>
+        
     <ram:ApplicableHeaderTradeSettlement>
 
       <ram:PaymentReference>XXX--invoice.id--XXX</ram:PaymentReference>
