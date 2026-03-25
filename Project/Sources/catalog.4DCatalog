@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
-<base name="HDI_4DWP_GenerateFacturX" uuid="56C6D37CB1EC47E3A030F6D50EB4C91B" collation_locale="fr">
+<base name="7. Invoice" uuid="56C6D37CB1EC47E3A030F6D50EB4C91B" collation_locale="fr">
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="INFO" uuid="107A367EBCC346259FD971E8FC1097DA" id="1">
 		<field name="ID" uuid="C6DBB917EEE44AF9BDA57ABA22C55C6B" type="4" unique="true" autosequence="true" not_null="true" id="1">
@@ -62,6 +62,6 @@
 		</field_ref>
 	</index>
 	<base_extra>
-		<journal_file journal_file_enabled="true"/>
+		<journal_file journal_file_enabled="false"/>
 	</base_extra>
 </base>
